@@ -1,0 +1,10 @@
+name: gwb
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pip:
+    - sepal_ui==2.21.0
