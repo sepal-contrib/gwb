@@ -8,3 +8,4 @@ dependencies:
   - numpy
   - pip:
     - sepal_ui==2.21.0
+    - rasterio<=1.4.3
