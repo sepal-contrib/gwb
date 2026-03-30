@@ -16,6 +16,18 @@ jobs:
           environment-file: sepal_environment.yml
           cache-environment: true
 
+
+      - name: Verify notebook kernelspec
+        run: |
+          kernel_name=$(python3 -c "import json; nb=json.load(open('ui.ipynb')); print(nb['metadata']['kernelspec']['name'])")
+          expected="venv-gwb"
+          if [ "$kernel_name" != "$expected" ]; then
+            echo "ERROR: kernelspec name '$kernel_name' != expected '$expected'"
+            echo "SEPAL's update-app.sh installs kernels as 'venv-<app_name>'. Update ui.ipynb metadata."
+            exit 1
+          fi
+          echo "kernelspec name OK: $kernel_name"
+
       - name: Install test deps
         shell: micromamba-shell {0}
         run: pip install pytest nbmake ipykernel
